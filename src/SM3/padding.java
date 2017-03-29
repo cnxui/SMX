@@ -39,7 +39,7 @@ public class padding {
         {
             throw new RuntimeException("消息过长，无法处理");
         }
-        System.out.println("原始消息：" + pa.byte2hex(m));
+        //System.out.println("原始消息：" + pa.byte2hex(m));
         long l = m.length * 8; //消息长度
         long k = 448 - (l + 1) % 512;
         if (k < 0) {
@@ -56,7 +56,7 @@ public class padding {
             i -= 8;
         }
         M = joint(M, last(l));
-        System.out.println("填充之后的消息：" + pa.byte2hex(M));
+        //System.out.println("填充之后的消息：" + pa.byte2hex(M));
         
 		return M;	
 	}

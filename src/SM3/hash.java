@@ -15,8 +15,8 @@ public class hash
 	
 	public byte[] hash(byte[] m) throws IOException
 	{
-		byte[] M = m;
-		//System.out.println("需要进行散列的消息（扩充之后）"+ param.byte2hex(M));
+		padding pad = new padding();
+		byte[] M = pad.padding(m);
 		int n = (M.length * 8)/512; //迭代次数
 		byte[] B;
 		byte[] VI = pa.IV.toByteArray();//获取初始变量
@@ -26,7 +26,7 @@ public class hash
 			B = Arrays.copyOfRange(M, i * 64, (i + 1) * 64);
 			VII = CF.cf(VI,B);
 			VI = VII;
-			System.out.println("第" + i +"轮压缩后的值:" + pa.byte2hex(VII));
+			//System.out.println("第" + i +"轮压缩后的值:" + pa.byte2hex(VII));
 		}
 		
 		return VII;

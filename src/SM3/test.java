@@ -18,10 +18,8 @@ public class test {
 		Scanner scan = new Scanner(System.in);
 		String str = scan.next(); 
 		source = str.getBytes();
-		
-//		source = "abc".getBytes();
-		byte[] m = pad.padding(source);
-		value = sm3.hash(m);
+
+		value = sm3.hash(source);
 		System.out.println("散列值为：" + pa.byte2hex(value));
 	}
 
