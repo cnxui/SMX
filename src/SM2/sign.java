@@ -138,7 +138,7 @@ public class sign
 		System.out.println("用户ID为："+id_a.toString());
 		System.out.println("ASCII编码记IDA：" + pa3.byte2hex(userID));
 		BigInteger da = new BigInteger(dA);
-		System.out.println("用户私钥为："+da.toString(16));
+		System.out.println("私钥dA："+da.toString(16));
 		byte[] m = M;
 		System.out.println("待签名的消息为："+ new BigInteger(m).toString(16));
 		//椭圆曲线参数
@@ -177,11 +177,14 @@ public class sign
 				//官方测试
 				String ks = "6CB28D99385C175C94F94E934817663FC176D925DD72B727260DBAAE1FB2F96F";
 				k = new BigInteger(ks,16);
+				System.out.println("随机数k：" + k.toString(16));
 				x1y1 = pa2.ecc_g.multiply(k);
-				
+				System.out.println("椭圆曲线点(x1 ,y1 )=[k]G--坐标x1：" + x1y1.getX().toBigInteger().toString(16));
+				System.out.println("椭圆曲线点(x1 ,y1 )=[k]G--坐标y1：" + x1y1.getY().toBigInteger().toString(16));
 				r = r.add(x1y1.getX().toBigInteger());
 				r = r.mod(pa2.ecc_n);
 			}while(r.equals(BigInteger.ZERO) || r.add(k).equals(pa2.ecc_n));
+			System.out.println("r：" + r.toString(16));
 			//计算s
 			BigInteger s1 = da.add(BigInteger.ONE);
 			s1 = s1.modInverse(pa2.ecc_n);
@@ -190,6 +193,7 @@ public class sign
 			s2 = k.subtract(s2).mod(pa2.ecc_n);
 			s = s1.multiply(s2).mod(pa2.ecc_n);
 		}while(s.equals(BigInteger.ZERO));
+		System.out.println("s：" + s.toString(16));
 		BigInteger[] result = new BigInteger[]{r,s};
 		return result;
 	}
@@ -207,11 +211,11 @@ public class sign
 		BigInteger dab = new BigInteger(das,16);
 		byte[] da = dab.toByteArray();
 		BigInteger[] res = test.ToSign(uid, da, m);
-		for(int i=0;i<res.length;i++)
-		{
-			BigInteger tem = res[i];
-			System.out.println(tem);
-		}
+//		for(int i=0;i<res.length;i++)
+//		{
+//			BigInteger tem = res[i];
+//			System.out.println(tem);
+//		}
 	}
 
 }

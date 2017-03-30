@@ -5,3 +5,5 @@ ENTLA		ok
 杂凑值ZA=H256(ENTLA ∥IDA ∥a∥b∥xG ∥yG ∥xA ∥yA) 		ok
 M=ZA ∥M			ok
 密码杂凑函数值e=H256 (M ):		ok
+
+r，s 签名通过！
