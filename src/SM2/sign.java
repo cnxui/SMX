@@ -122,7 +122,7 @@ public class sign
 	 * @param  userID_用户ID
 	 * @param  dA_用户私钥
 	 * @param  M_待签名的消息
-	 * @return 签名
+	 * @return 待签名消息byte[]，r，s；均为16进制
 	 * @throws IOException 
 	 */
 	public static BigInteger[] ToSign(byte[] userID, byte[] dA, byte[] M) throws IOException
@@ -194,7 +194,8 @@ public class sign
 			s = s1.multiply(s2).mod(pa2.ecc_n);
 		}while(s.equals(BigInteger.ZERO));
 		System.out.println("s：" + s.toString(16));
-		BigInteger[] result = new BigInteger[]{r,s};
+		BigInteger mmm = new BigInteger(M);
+		BigInteger[] result = new BigInteger[]{mmm,r,s};
 		return result;
 	}
 	
@@ -210,12 +211,13 @@ public class sign
 		String das = "128B2FA8BD433C6C068C8D803DFF79792A519A55171B1B650C23661D15897263";
 		BigInteger dab = new BigInteger(das,16);
 		byte[] da = dab.toByteArray();
-		BigInteger[] res = test.ToSign(uid, da, m);
-//		for(int i=0;i<res.length;i++)
-//		{
-//			BigInteger tem = res[i];
-//			System.out.println(tem);
-//		}
+		sign sig = new sign();
+		BigInteger[] resulte = sig.ToSign(uid, da, m);
+		System.out.println();
+		System.out.println();
+		System.out.println("消息M：" + resulte[0].toString(16));
+		System.out.println("r：" + resulte[1].toString(16));
+		System.out.println("s：" + resulte[2].toString(16));
 	}
 
 }

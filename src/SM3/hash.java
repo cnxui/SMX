@@ -26,7 +26,7 @@ public class hash
 			B = Arrays.copyOfRange(M, i * 64, (i + 1) * 64);
 			VII = CF.cf(VI,B);
 			VI = VII;
-			//System.out.println("第" + i +"轮压缩后的值:" + pa.byte2hex(VII));
+			System.out.println("共" + n + "轮压缩，" + "第" + i +"轮压缩后的值:" + pa.byte2hex(VII));
 		}
 		
 		return VII;
