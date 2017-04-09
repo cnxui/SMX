@@ -83,6 +83,7 @@ public class sign
 		za[0] = (byte) (len>>8);
 		za[1] = (byte)(len);
 		System.out.println("ENTLA：" + pa3.byte2hex(za));
+		System.out.println();
 		za = joint(za,IDA);
 		za = joint(za, bigint2bytes(pa2.sm2_a));
 		za = joint(za, bigint2bytes(pa2.sm2_b));
@@ -91,6 +92,7 @@ public class sign
 		za = joint(za, bigint2bytes(PA.getX().toBigInteger()));
 		za = joint(za, bigint2bytes(PA.getY().toBigInteger()));
 		System.out.println("签名者信息拼接：" + pa3.byte2hex(za));
+		System.out.println();
 		hza = ha.hash(za);
 		//System.out.println("Za的值为："+ pa3.byte2hex(hza));
 		return hza;
@@ -136,27 +138,36 @@ public class sign
 	//初始化用户A的原始数据
 		BigInteger id_a = new BigInteger(userID);
 		System.out.println("用户ID为："+id_a.toString());
+		System.out.println();
 		System.out.println("ASCII编码记IDA：" + pa3.byte2hex(userID));
+		System.out.println();
 		BigInteger da = new BigInteger(dA);
 		System.out.println("私钥dA："+da.toString(16));
+		System.out.println();
 		byte[] m = M;
 		System.out.println("待签名的消息为："+ new BigInteger(m).toString(16));
+		System.out.println();
 		//椭圆曲线参数
 		SM2.param sm2pa = new SM2.param();
 		//用户A的公钥（即点pa = [da]G = （xa,ya))
 		ECPoint pa = sm2pa.ecc_g.multiply(da);
 		System.out.println("公钥Pa-xa：" + pa.getX().toBigInteger().toString(16));
+		System.out.println();
 		System.out.println("公钥Pa-ya：" + pa.getY().toBigInteger().toString(16));
+		System.out.println();
 		//获取ZA
 		byte[] za = getZa(userID, pa);
 		System.out.println("za散列值：" + pa3.byte2hex(za));
+		System.out.println();
 		//求取M_
 		SM3.padding jo = new SM3.padding();
 		byte[] m_ = jo.joint(za, m );
 		System.out.println("M_：" + pa3.byte2hex(m_));
+		System.out.println();
 		//求取e
 		byte[] e = ha.hash(m_);
 		System.out.println("e：" + pa3.byte2hex(e));
+		System.out.println();
 		//计算r、s
 		BigInteger k;
 		ECPoint x1y1;
@@ -178,9 +189,11 @@ public class sign
 				String ks = "6CB28D99385C175C94F94E934817663FC176D925DD72B727260DBAAE1FB2F96F";
 				k = new BigInteger(ks,16);
 				System.out.println("随机数k：" + k.toString(16));
+				System.out.println();
 				x1y1 = pa2.ecc_g.multiply(k);
 				System.out.println("椭圆曲线点(x1 ,y1 )=[k]G--坐标x1：" + x1y1.getX().toBigInteger().toString(16));
 				System.out.println("椭圆曲线点(x1 ,y1 )=[k]G--坐标y1：" + x1y1.getY().toBigInteger().toString(16));
+				System.out.println();
 				r = r.add(x1y1.getX().toBigInteger());
 				r = r.mod(pa2.ecc_n);
 			}while(r.equals(BigInteger.ZERO) || r.add(k).equals(pa2.ecc_n));
