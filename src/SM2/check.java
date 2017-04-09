@@ -86,7 +86,7 @@ public class check
 
 			BigInteger R = step7(e1, x11y11.getX().toBigInteger());//这里x1是指用户公钥的x1
 			System.out.println("R:" + R.toString(16));
-			if(R == r1)
+			if(R.equals(r1))
 			{
 				return true;
 			}
@@ -221,22 +221,7 @@ public class check
 		else
 		{
 			System.out.println("验证失败！");
-		}
-		
-		
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		}	
 	}
 	
-
 }
