@@ -3,7 +3,6 @@ package SM3;
 import java.io.IOException;
 import SM3.param.*;
 /**
- * 
  * @author threads.xui
  *填充过程为：假设消息m 的长度为l 比特。首先将比特“1”添加到消息的末尾，
  *再添加k 个“0”，k是满 足l + 1 + k ≡ 448mod512 的最小的非负整数。
@@ -11,9 +10,10 @@ import SM3.param.*;
  *的比特长度为512的倍数。
  *需要注意的是如果一开始l长度就是512的倍数依然需要进行填充
  */
-public class padding {
+public class padding 
+{
 	static param pa = new param();
-	
+	//byte[]拼接
 	public static byte[] joint(byte[] a,byte[]b)
 	{
 		byte[] c = new byte[a.length+b.length];
@@ -22,11 +22,12 @@ public class padding {
 		return c;
 	}
 	
-	//获取消息长度的二进制表示来填充最后64位
+	//获取消息长度的二进制表示来填充最后64 bite位
     public static byte[] last(long l) 
     {
         byte[] bytes = new byte[8];
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++) 
+        {
             bytes[i] = (byte) (l >>> ((7 - i) * 8));
         }
         return bytes;
@@ -42,7 +43,8 @@ public class padding {
         System.out.println("原始消息：" + pa.byte2hex(m));
         long l = m.length * 8; //消息长度
         long k = 448 - (l + 1) % 512;
-        if (k < 0) {
+        if (k < 0) 
+        {
             k = k + 512;
         }
 
@@ -51,7 +53,8 @@ public class padding {
         M = joint(M,one);
         final byte[] zero = {(byte) 0x00};
         long i = k - 7;
-        while (i > 0) {
+        while (i > 0) 
+        {
             M = joint(M, zero);//填充0
             i -= 8;
         }
