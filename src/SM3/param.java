@@ -83,7 +83,7 @@ public class param
                 ^ Integer.rotateLeft(x.intValue(), 23));
     }	
     
-    public static String byte2hex(byte [] buffer)
+    public static String byte2string(byte [] buffer)
     {  
         String h = "";         
         for(int i = 0; i < buffer.length; i++)
@@ -93,7 +93,7 @@ public class param
             {  
                 temp = "0" + temp;  
             }  
-            h = h + " "+ temp;  
+            h = h + temp;  
         }            
         return h;      
     }  

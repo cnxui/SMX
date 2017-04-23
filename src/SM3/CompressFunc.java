@@ -7,9 +7,9 @@ public class CompressFunc
 {
 	static param pa = new param();
 	private static char[] chars = {'0', '1', '2', '3', '4', '5', '6', '7', '8',
-            '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+            '9', 'A', 'B', 'C', 'D', 'E', 'F'};//定义寄存器
    
-	public static byte[] toByteArray(int i) 
+	public static byte[] toByteArray(int i) //官方文档定义了大端小端存储，注意赋值顺序
 	{
         byte[] byteArray = new byte[4];
         byteArray[0] = (byte) (i >>> 24);
@@ -106,12 +106,6 @@ public class CompressFunc
 		
 	}
 	
-	
-//	public static void main(String[] args) 
-//	{
-//		// TODO Auto-generated method stub
-//
-//	}
 
 
 }

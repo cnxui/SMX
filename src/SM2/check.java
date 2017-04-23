@@ -180,15 +180,7 @@ public class check
 	}
 
 	public static void main(String[] args) throws IOException 
-	{
-//		BigInteger fir = new BigInteger("1");
-//		BigInteger r1 = new BigInteger("1");
-//		int re = r1.compareTo(fir);
-//		System.out.println(re);
-		
-//		SM2.param pa = new SM2.param();
-//		System.out.println(pa.ecc_gx.toBigInteger());
-		
+	{		
 		
 		sign test = new sign();
 		String uids = "ALICE123@YAHOO.COM";

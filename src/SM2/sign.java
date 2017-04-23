@@ -61,7 +61,7 @@ public class sign
 	/**
 	 * int 转 byte[]
 	 */
-	public static byte[] intToBytes(int value)   
+	public static byte[] int2Bytes(int value)   
 	{   
 	    byte[] src = new byte[4];  
 	    src[0] = (byte) ((value>>24) & 0xFF);  
@@ -82,7 +82,7 @@ public class sign
 		za = new byte[2];
 		za[0] = (byte) (len>>8);
 		za[1] = (byte)(len);
-		System.out.println("ENTLA：" + pa3.byte2hex(za));
+		System.out.println("ENTLA：" + pa3.byte2string(za));
 		System.out.println();
 		za = joint(za,IDA);
 		za = joint(za, bigint2bytes(pa2.sm2_a));
@@ -91,7 +91,7 @@ public class sign
 		za = joint(za, bigint2bytes(pa2.sm2_Gy));
 		za = joint(za, bigint2bytes(PA.getX().toBigInteger()));
 		za = joint(za, bigint2bytes(PA.getY().toBigInteger()));
-		System.out.println("签名者信息拼接：" + pa3.byte2hex(za));
+		System.out.println("签名者信息拼接：" + pa3.byte2string(za));
 		System.out.println();
 		hza = ha.hash(za);
 		//System.out.println("Za的值为："+ pa3.byte2hex(hza));
@@ -139,7 +139,7 @@ public class sign
 		BigInteger id_a = new BigInteger(userID);
 		System.out.println("用户ID为："+id_a.toString());
 		System.out.println();
-		System.out.println("ASCII编码记IDA：" + pa3.byte2hex(userID));
+		System.out.println("ASCII编码记IDA：" + pa3.byte2string(userID));
 		System.out.println();
 		BigInteger da = new BigInteger(dA);
 		System.out.println("私钥dA："+da.toString(16));
@@ -157,16 +157,16 @@ public class sign
 		System.out.println();
 		//获取ZA
 		byte[] za = getZa(userID, pa);
-		System.out.println("za散列值：" + pa3.byte2hex(za));
+		System.out.println("za散列值：" + pa3.byte2string(za));
 		System.out.println();
 		//求取M_
 		SM3.padding jo = new SM3.padding();
 		byte[] m_ = jo.joint(za, m );
-		System.out.println("M_：" + pa3.byte2hex(m_));
+		System.out.println("M_：" + pa3.byte2string(m_));
 		System.out.println();
 		//求取e
 		byte[] e = ha.hash(m_);
-		System.out.println("e：" + pa3.byte2hex(e));
+		System.out.println("e：" + pa3.byte2string(e));
 		System.out.println();
 		//计算r、s
 		BigInteger k;
@@ -178,19 +178,19 @@ public class sign
 			do	//计算r
 			{
 				//随机数k
-//				AsymmetricCipherKeyPair keypair = pa2.ecc_kpg.generateKeyPair();
-//				ECPrivateKeyParameters ecpriv = (ECPrivateKeyParameters) keypair.getPrivate();
-//				ECPublicKeyParameters ecpub = (ECPublicKeyParameters) keypair.getPublic();
-//				k = ecpriv.getD();
+				AsymmetricCipherKeyPair keypair = pa2.ecc_kpg.generateKeyPair();
+				ECPrivateKeyParameters ecpriv = (ECPrivateKeyParameters) keypair.getPrivate();
+				ECPublicKeyParameters ecpub = (ECPublicKeyParameters) keypair.getPublic();
+				k = ecpriv.getD();
 				//椭圆曲线点（x1,y1)
-//				x1y1 = ecpub.getQ();
+				x1y1 = ecpub.getQ();
 				
 				//官方测试
-				String ks = "6CB28D99385C175C94F94E934817663FC176D925DD72B727260DBAAE1FB2F96F";
-				k = new BigInteger(ks,16);
+//				String ks = "6CB28D99385C175C94F94E934817663FC176D925DD72B727260DBAAE1FB2F96F";
+//				k = new BigInteger(ks,16);
 				System.out.println("随机数k：" + k.toString(16));
 				System.out.println();
-				x1y1 = pa2.ecc_g.multiply(k);
+//				x1y1 = pa2.ecc_g.multiply(k);
 				System.out.println("椭圆曲线点(x1 ,y1 )=[k]G--坐标x1：" + x1y1.getX().toBigInteger().toString(16));
 				System.out.println("椭圆曲线点(x1 ,y1 )=[k]G--坐标y1：" + x1y1.getY().toBigInteger().toString(16));
 				System.out.println();
