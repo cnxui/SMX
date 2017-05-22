@@ -76,6 +76,7 @@ public class sign
 	 */
 	public static byte[] getZa(byte[] IDA, ECPoint PA) throws IOException
 	{
+//		SM3.hash ha = new hash();
 		byte[] za,hza;
 		int len = IDA.length * 8;		
 		za = new byte[2];
@@ -216,14 +217,11 @@ public class sign
 		// TODO Auto-generated method stub
 //		System.out.println(pa2.sm2_n);
 		sign test = new sign();
-//		String uids = "ALICE123@YAHOO.COM";
-		String uids = "ALICE589@YAHOO.COM";
+		String uids = "ALICE123@YAHOO.COM";
 		byte[] uid = uids.getBytes();
-//		String ms = "message digest";
-		String ms = "mese digest";
+		String ms = "message digest";
 		byte[] m = ms.getBytes();
-//		String das = "128B2FA8BD433C6C068C8D803DFF79792A519A55171B1B650C23661D15897263";
-		String das = "128B2FA8BD433C68C8D803DFF79792A519A55171B1B650C23661D15897263";
+		String das = "128B2FA8BD433C6C068C8D803DFF79792A519A55171B1B650C23661D15897263";
 		BigInteger dab = new BigInteger(das,16);
 		byte[] da = dab.toByteArray();
 		sign sig = new sign();

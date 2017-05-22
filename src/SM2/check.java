@@ -206,8 +206,6 @@ public class check
 		//提供公钥
 		SM2.param para = new SM2.param();
 		ECPoint pa = para.ecc_g.multiply(dab);
-		System.out.println("公钥x:" + pa.getX().toBigInteger().toString(16));
-		System.out.println("公钥y:" + pa.getY().toBigInteger().toString(16));
 		if(check(uid, pa, m, resulte[1], resulte[2]))
 		{
 			System.out.println("验证通过！");
